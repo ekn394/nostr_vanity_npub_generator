@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+
+<!--<script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>-->
+<script src="nostr-tools-1.7.4.js"></script>
+<h2>View Developer Tools > Console to see the output.</h2>
+<h3>Proper Interface to come later</h3>
+</h2>
+<script>
+  let target = "ekn";
+  let RESERVED = "npub1".length; //all nip19 npubs start with 'npub1'
+  let myPrivKey = NostrTools.generatePrivateKey("");
+  let myPubKey = NostrTools.getPublicKey(myPrivKey);
+  let npub = NostrTools.nip19.npubEncode(myPubKey)
+  
+  while(npub.substring(RESERVED, RESERVED+target.length) !== target ){
+      myPrivKey = NostrTools.generatePrivateKey("");
+      myPubKey = NostrTools.getPublicKey(myPrivKey);
+      npub = NostrTools.nip19.npubEncode(myPubKey)
+      console.log(npub);
+  }
+  console.log("Found an npub starting with target 'ekn'");
+  console.log("hex");
+  console.log(myPubKey);
+  console.log("npub");
+  console.log(npub);
+  console.log("pk");
+  console.log(myPrivKey);
+  console.log("nsec");
+  console.log(NostrTools.nip19.nsecEncode(myPrivKey));
+
+</script>
+
+
+
+</html>
+
