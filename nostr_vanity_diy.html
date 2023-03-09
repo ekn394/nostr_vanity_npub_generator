@@ -3,31 +3,32 @@
 <head>
 <!--<script src="https://unpkg.com/nostr-tools/lib/nostr.bundle.js"></script>-->
 <script src="nostr-tools-1.7.4.js"></script>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <h2>Noster Vanity Public Key Generator</h2>
-  <form>
-  Target String (3 Characters MAX) <input id="inputBox" value="ace" onfocus="this.value=''" type="text">
+  <p class="title">Nostr Vanity Public Keys </p>
+
+  <h2>Target String (3 characters max)</h2> 
+  <form class="row">
+    <input id="inputBox" value="ace" onfocus="this.value=''" type="text">
   </form>
   <p>If you are generating a public HEX key (that will work on Noster):</p>
   <ul>
     <li>You are limited to using hex characters: <strong>0123456789abcdef</strong></li>
     <li>Less visible, your vanity pub key MAY not be visible, defeating the purpose</li>
-    <li>Faster to calculate</li>
   </ul>
 
-  <button id="make public Hex key" onclick="genVanityHexKey()"> Create Hex pub key</button>
+  <button class="row" onclick="genVanityHexKey()"> Create Hex pub key</button>
+<br><br><br>
 <hr>
-
   <p>If you are generating a Noster public key (npub) :</p>
   <ul>
     <li>You are limited to characters: <strong>qpzry9x8gf2tvdw0s3jn54khce6mua7l</strong></li>
     <li>Missing: b, d, i, o, and the number 1</li>
-    <li>Slower to calculate</li>
   </ul>
 
-  <button id="make npub" onclick="genVanityNpub()"> Create 'npub' key</button>
-<hr>
+  <button class = "row" onclick="genVanityNpub()"> Create 'npub' key</button>
+<!--
   <p>Expectations for a computer with 3060 Graphics Card: </p>
   <ul>
     <li>1 Char: <1 second </li>
@@ -36,9 +37,40 @@
     <li>4 Char: browser timeout error after ~2min</li>
   </ul>
 
-  <p>Are you sure that ALL the letters in your search string are legal characters in your method?</h2>
+  -->
   <hr>
   <script>
+    let npubAlphabet = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+    let hexAlphabet = "0123456789abcdef"
+
+    function hexConfirmValid(testString){
+      console.log(testString);
+      for (var char of testString){
+        console.log(char);
+        console.log(hexAlphabet.indexOf(char));
+        if (hexAlphabet.indexOf(char) == -1){
+          alert(char + " is an invalid character for an hex key. "+
+          "\nThe only valid characters are " + hexAlphabet + 
+          "\nPlease try again with a different target.");
+          return false;
+        }
+      }
+    }
+
+    function npubConfirmValid(testString){
+      console.log(testString);
+      for (var char of testString){
+        console.log(char);
+        console.log(npubAlphabet.indexOf(char));
+        if (npubAlphabet.indexOf(char) == -1){
+          alert(char + " is an invalid character for an npub. "+
+          "\nThe only valid characters are " + npubAlphabet+
+          "\nIllegal Characters include b, d, i, o, and the number 1" +
+          "\nPlease try again with a different target.");
+          return false;
+        }
+      }
+    }
 
     function genVanityNpub(){
       var pubOutbox = document.getElementById("pubPlaceholder");
@@ -46,6 +78,14 @@
       var textbox = document.getElementById("inputBox");// get the textbox element by its id
       var value = textbox.value; //get the value out of the textbox
       let target = value;
+      let result = npubConfirmValid(target);
+      console.log(result);
+
+      console.log("back in genVanityNpub, errorCheck returned "+ result);
+      if (result == false){
+        //alert("Please try a different target string.")
+        return false;
+      }
       let RESERVED = "npub1".length; //all nip19 npubs start with 'npub1'
       let myPrivKey = NostrTools.generatePrivateKey("");
       let myPubKey = NostrTools.getPublicKey(myPrivKey);
@@ -54,8 +94,8 @@
       while(npub.substring(RESERVED, RESERVED+target.length) !== target ){
         myPrivKey = NostrTools.generatePrivateKey("");
         myPubKey = NostrTools.getPublicKey(myPrivKey);
-        npub = NostrTools.nip19.npubEncode(myPubKey)
-        nsec = NostrTools.nip19.npubEncode(myPrivKey)
+        npub = NostrTools.nip19.npubEncode(myPubKey);
+        nsec = NostrTools.nip19.nsecEncode(myPrivKey);
         //console.log(npub);
       }
       pubOutbox.innerText = npub;
@@ -68,6 +108,14 @@
       var textbox = document.getElementById("inputBox");// get the textbox element by its id
       var value = textbox.value; //get the value out of the textbox
       let target = value;
+      let result = hexConfirmValid(target);
+      console.log(result);
+
+      console.log("back in genVanityHexKey, errorCheck returned "+ result);
+      if (result == false){
+        //alert("Please try a different target string.")
+        return false;
+      }
       let RESERVED = 0; 
       let myPrivKey = NostrTools.generatePrivateKey("");
       let myPubKey = NostrTools.getPublicKey(myPrivKey);
@@ -84,9 +132,12 @@
   </script>
   <h3>Public Key</h3>
   <p id="pubPlaceholder"></p>
-
   <h3>Private Key</h3>
   <p id="privPlaceholder"></p>
+
+  <hr>
+  <footer>Download to use this offline from www.github.com/ekn394</footer>
 </body>
+
 </html>
 
