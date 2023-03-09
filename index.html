@@ -15,7 +15,6 @@
   <p>If you are generating a public HEX key (that will work on Nostr):</p>
   <ul>
     <li>You are limited to using hex characters: <strong>0123456789abcdef</strong></li>
-    <li>Less visible, your vanity pub key MAY not be visible, defeating the purpose</li>
   </ul>
 
   <button class="row" onclick="genVanityHexKey()"> Create Vanity Hex pub key</button>
@@ -23,8 +22,7 @@
 <hr>
   <p>If you are generating a Noster public key (npub) :</p>
   <ul>
-    <li>You are limited to characters: <strong>qpzry9x8gf2tvdw0s3jn54khce6mua7l</strong></li>
-    <li>Missing: b, i, o, and the number 1</li>
+    <li>Cannot use the characters: b, i, o, and the number 1</li>
   </ul>
 
   <button class = "row" onclick="genVanityNpub()"> Create Vanity 'npub' key</button>
@@ -55,7 +53,6 @@
         console.log(npubAlphabet.indexOf(char));
         if (npubAlphabet.indexOf(char) == -1){
           alert(char + " is an invalid character for an npub. "+
-          "\nThe only valid characters are " + npubAlphabet+
           "\nIllegal Characters include b, i, o, and the number 1" +
           "\nPlease try again with a different target.");
           return false;
