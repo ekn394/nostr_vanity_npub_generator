@@ -1,10 +1,3 @@
-
-/*
-*{
-	border: solid red 1px;
-}
-*/
-
 body {
     text-align: left;
     font-family: 'Open Sans', sans-serif;
@@ -17,9 +10,6 @@ body {
     color:aliceblue;
 }
 
-p{
-    font-size: 18pt;
-}
 .title {
 	color: #9d28fc;
     text-align: center;
@@ -31,6 +21,10 @@ p{
     10px 10px 30px rgb(5, 4, 5),
     14px 14px 40px rgb(160, 6, 165);
  
+}
+
+p{
+    font-size: 18pt;
 }
 
 button{
@@ -48,9 +42,6 @@ button{
 
 button:hover{
 	background-color:#00A3E0;
-	/*
-	color: white;
-	*/
 }
 
 button:active {
@@ -64,7 +55,6 @@ button:focus {
 }
 
 #inputBox{
-    border-radius: red solid 1px;
     background-color: #9d28fc;
     height: 46px;
     max-width: 500px;
@@ -74,7 +64,6 @@ button:focus {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-
 }
 
 h2{
@@ -84,5 +73,9 @@ h2{
 .row {
 	clear: both;
 	width: 100%;
-    border-radius: red solid 1px;
+}
+
+a{
+    color: white;
+    text-decoration: none;
 }

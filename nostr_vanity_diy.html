@@ -12,7 +12,7 @@
   <form class="row">
     <input id="inputBox" value="ace" onfocus="this.value=''" type="text">
   </form>
-  <p>If you are generating a public HEX key (that will work on Noster):</p>
+  <p>If you are generating a public HEX key (that will work on Nostr):</p>
   <ul>
     <li>You are limited to using hex characters: <strong>0123456789abcdef</strong></li>
     <li>Less visible, your vanity pub key MAY not be visible, defeating the purpose</li>
@@ -28,16 +28,7 @@
   </ul>
 
   <button class = "row" onclick="genVanityNpub()"> Create 'npub' key</button>
-<!--
-  <p>Expectations for a computer with 3060 Graphics Card: </p>
-  <ul>
-    <li>1 Char: <1 second </li>
-    <li>2 Char: 2 seconds </li>
-    <li>3 Char: 3 seconds </li>
-    <li>4 Char: browser timeout error after ~2min</li>
-  </ul>
 
-  -->
   <hr>
   <script>
     let npubAlphabet = "qpzry9x8gf2tvdw0s3jn54khce6mua7l";
@@ -128,15 +119,15 @@
       pubOutbox.innerText = myPubKey;
       privOutbox.innerText = myPrivKey;
     }
-
   </script>
+
   <h3>Public Key</h3>
   <p id="pubPlaceholder"></p>
   <h3>Private Key</h3>
   <p id="privPlaceholder"></p>
 
   <hr>
-  <footer>Download to use this offline from www.github.com/ekn394</footer>
+  <footer>Download to use this webpage offline - <a href="https://github.com/ekn394/nostr_vanity_npub_generator">https://github.com/ekn394/nostr_vanity_npub_generator</a> </footer>
 </body>
 
 </html>
